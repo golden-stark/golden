@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Popup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: absolute;
+            font-size: 80px;
+            color: #ff6b9d;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .popup {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+            position: relative;
+            max-width: 320px;
+            animation: popupSlide 1s ease-out;
+            border: 2px solid rgba(255, 107, 157, 0.3);
+        }
+
+        @keyframes popupSlide {
+            0% {
+                transform: scale(0.3) rotate(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .gif-container {
+            margin: 50px 0;
+            position: relative;
+            height: 150px;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tenor-gif-embed {
+            border-radius: 20px;
+            border: 4px solid rgba(255, 107, 157, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .flower {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(45deg, #ff9ff3, #f368e0);
+            border-radius: 50% 20% 50% 20%;
+            top: -10px;
+            right: -10px;
+            animation: wiggle 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        h2 {
+            color: #2d3436;
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .buttons a {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .btn a {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn a {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Heart border decoration */
+        .popup::before {
+            content: '💕';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        .corner-hearts {
+            position: absolute;
+            font-size: 18px;
+        }
+
+        .corner-hearts.top-left {
+            top: 15px;
+            left: 15px;
+            animation: slideInLeft 2s infinite;
+        }
+
+        .corner-hearts.top-right {
+            top: 15px;
+            right: 15px;
+            animation: slideInRight 2s infinite reverse;
+        }
+
+        @keyframes slideInLeft {
+            0%, 100% { transform: translateX(-20px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            0%, 100% { transform: translateX(20px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;">💕</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">💗</div>
+    <div class="heart" style="left: 60%; animation-delay: 0.5s;">💝</div>
+    <div class="heart" style="left: 80%; animation-delay: 1.5s;">💖</div>
+    <div class="heart" style="left: 90%; animation-delay: 2.5s;">💕</div>
+
+    <div class="popup">
+        <div class="corner-hearts top-left">💕</div>
+        <div class="corner-hearts top-right">💕</div>
+        
+        <div class="gif-container">
+<div class="tenor-gif-embed" data-postid="16663184733618761977" data-share-method="host" data-aspect-ratio="0.991968" data-width="100%"><a href="https://tenor.com/view/cute-fingers-fixed-cat-cut-fingers-shy-gif-16663184733618761977">Cute Fingers Fixed Cat GIF</a>from <a href="https://tenor.com/search/cute+fingers+fixed-gifs">Cute Fingers Fixed GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>            <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+            <div class="flower"></div>
+        </div>
+        
+        <h2> Soch lo  💕</h2>
+        
+        <div class="btn">
+      <a href="yes.html" >yes</a>
+      <a href="no2.html" >no</a>
+    </div>
+
+     
+
+    </script>
+     
+</body>
+</html>

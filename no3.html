@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Popup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: absolute;
+            font-size: 80px;
+            color: #ff6b9d;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .popup {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+            position: relative;
+            max-width: 350px;
+            animation: popupSlide 1s ease-out;
+            border: 2px solid rgba(255, 107, 157, 0.3);
+        }
+
+        @keyframes popupSlide {
+            0% {
+                transform: scale(0.3) rotate(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .gif-container {
+            margin: 50px 0;
+            position: relative;
+            height: 150px;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tenor-gif-embed {
+            border-radius: 20px;
+            border: 4px solid rgba(255, 107, 157, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .flower {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(45deg, #ff9ff3, #f368e0);
+            border-radius: 50% 20% 50% 20%;
+            top: -10px;
+            right: -10px;
+            animation: wiggle 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        h2 {
+            color: #2d3436;
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .buttons {
+            position: relative;
+            height: 60px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: absolute;
+            z-index: 20;
+        }
+
+        /* Yes button - LEFT position like original, but STABLE */
+        .btn-yes {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+            left: 0;  /* LEFT SIDE positioning */
+            transform: translateX(0); /* No movement */
+        }
+
+        /* No button - RIGHT position with movement */
+        .btn-no {
+            background: rgba(255, 255, 255, 0.8);
+            color: #636e72;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 107, 157, 0.4);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            font-size: 15px;
+            right: 0;
+            transform: translateX(0);
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(2deg); }
+            75% { transform: translateX(-5px) rotate(-2deg); }
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Chase animations ONLY for No button */
+        @keyframes chaseLeft {
+            0% { transform: translateX(0) rotate(0deg); }
+            20% { transform: translateX(-80px) translateY(-40px) rotate(-180deg); }
+            40% { transform: translateX(60px) translateY(30px) rotate(90deg); }
+            60% { transform: translateX(-60px) translateY(-20px) rotate(270deg); }
+            80% { transform: translateX(40px) translateY(20px) rotate(180deg); }
+            100% { transform: translateX(0) rotate(360deg); }
+        }
+
+        @keyframes chaseRight {
+            0% { transform: translateX(0) rotate(0deg); }
+            20% { transform: translateX(80px) translateY(-30px) rotate(180deg); }
+            40% { transform: translateX(-60px) translateY(40px) rotate(-90deg); }
+            60% { transform: translateX(60px) translateY(-20px) rotate(90deg); }
+            80% { transform: translateX(-40px) translateY(20px) rotate(-270deg); }
+            100% { transform: translateX(0) rotate(-360deg); }
+        }
+
+        .chasing {
+            animation-duration: 1.2s !important;
+            animation-timing-function: ease-in-out;
+        }
+
+        /* Heart border decoration */
+        .popup::before {
+            content: '💕';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        .corner-hearts {
+            position: absolute;
+            font-size: 18px;
+        }
+
+        .corner-hearts.top-left {
+            top: 15px;
+            left: 15px;
+            animation: slideInLeft 2s infinite;
+        }
+
+        .corner-hearts.top-right {
+            top: 15px;
+            right: 15px;
+            animation: slideInRight 2s infinite reverse;
+        }
+
+        @keyframes slideInLeft {
+            0%, 100% { transform: translateX(-20px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            0%, 100% { transform: translateX(20px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;">💕</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">💗</div>
+    <div class="heart" style="left: 60%; animation-delay: 0.5s;">💝</div>
+    <div class="heart" style="left: 80%; animation-delay: 1.5s;">💖</div>
+    <div class="heart" style="left: 90%; animation-delay: 2.5s;">💕</div>
+
+    <div class="popup">
+        <div class="corner-hearts top-left">💕</div>
+        <div class="corner-hearts top-right">💕</div>
+        
+        <div class="gif-container">
+            <div class="tenor-gif-embed" data-postid="15708885101381463678" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/dont-go-please-dont-go-dont-leave-stay-please-stay-gif-15708885101381463678">Dont Go Please Dont Go Sticker</a>from <a href="https://tenor.com/search/dont+go-stickers">Dont Go Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+            <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+            <div class="flower"></div>
+        </div>
+        
+        <h2>With you, every day<br>feels like Valentine's Day. 💕</h2>
+        
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="yesResponse()">Yes 😻</button>
+            <button class="btn btn-no" id="noButton" onclick="noResponse(event)">No 🏃‍♂️</button>
+        </div>
+    </div>
+
+    <script>
+        let chaseCount = 0;
+        
+        function yesResponse() {
+            window.location.href = "yes.html";
+        }
+
+        function noResponse(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            
+            chaseCount++;
+            const noBtn = document.getElementById('noButton');
+            
+            noBtn.classList.remove('chasing');
+            
+            const chaseType = chaseCount % 2 === 0 ? 'chaseLeft' : 'chaseRight';
+            noBtn.style.animationName = chaseType;
+            noBtn.classList.add('chasing');
+            
+            const texts = [
+                '💕 Caught you! 💕', 
+                '😻 No escape! 😻', 
+                '🏃‍♂️ Too slow! 🏃‍♂️',
+                '💖 Try harder! 💖',
+                '🤭 Gotcha! 🤭',
+                '😏 Nice try! 😏'
+            ];
+            noBtn.innerHTML = texts[Math.floor(Math.random() * texts.length)];
+            
+            setTimeout(() => {
+                noBtn.classList.remove('chasing');
+                noBtn.style.animationName = '';
+                noBtn.innerHTML = 'No 🏃‍♂️';
+            }, 1300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖','💕','💗','💝'][Math.floor(Math.random()*4)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
